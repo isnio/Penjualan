@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Saya - Dashboard Penjualan</title>
+    <style>
+        /* General Styling */
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            background-color: #ffffff;
+            color: #0c0c0c;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 0 25px;
+            box-sizing: border-box;
+        }
+
+        /* Header and Navigation */
+        header {
+            background: rgba(4, 0, 253, 0.9);
+            color: #ecf0f1;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+            margin: 0;
+        }
+
+        header nav ul li {
+            display: inline-block;
+            margin: 0 15px; /* Sedikit dikurangi agar muat */
+        }
+
+        header nav ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 0;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+        }
+
+        /* Section Styling for Full-Screen */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 25px;
+            box-sizing: border-box;
+            scroll-snap-align: start;
+            position: relative;
+        }
+
+        /* Backgrounds for each section */
+        #beranda {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://source.unsplash.com/1600x900/?office,desk') no-repeat center center/cover;
+            color: #ecf0f1;
+        }
+
+        #tentangsaya { /* Style untuk section Tentang Saya baru */
+            background-color: #f9f9f9; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        #proyek {
+            background-color: #ffffff; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        #keahlian { /* Style untuk section keahlian baru */
+            background-color: #f0f2f5; /* Warna latar beda tipis */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        #kontak {
+            background-color: #ffffff; /* Kembali ke putih atau #f0f2f5 */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        /* Hero Section Specific */
+        .hero-content {
+            animation: fadeIn 1.5s ease-out;
+            margin-top: 40px; /* Dikurangi sedikit */
+        }
+
+        .profile-section {
+            margin-bottom: 20px; /* Dikurangi sedikit */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-pic {
+            width: 130px; /* Dikurangi sedikit */
+            height: 130px; /* Dikurangi sedikit */
+            border-radius: 50%;
+            border: 3px solid #3498db;
+            margin-bottom: 10px; /* Dikurangi sedikit */
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .profile-section h1 {
+            font-size: 2.5em; /* Dikurangi sedikit */
+            margin-bottom: 8px; /* Dikurangi sedikit */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-section p {
+            font-size: 1.1em; /* Dikurangi sedikit */
+            margin-bottom: 15px; /* Dikurangi sedikit */
+            max-width: 600px;
+        }
+
+        .hero h1.main-title {
+            font-size: 2.8em; /* Dikurangi sedikit */
+            margin-bottom: 10px; /* Dikurangi sedikit */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p.subtitle {
+            font-size: 1.3em; /* Dikurangi sedikit */
+            margin-bottom: 30px; /* Dikurangi sedikit */
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #3498db;
+            color: #fff;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+        }
+
+        /* Section Headings */
+        section h2 {
+            font-size: 3em;
+            margin-bottom: 40px; 
+            color: #000000;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 4px;
+            background: #3498db;
+            bottom: 0;
+            left: 15%;
+            border-radius: 2px;
+        }
+        
+        /* Styling untuk Konten Proyek yang Digabung */
+        .proyek-content-wrapper {
+            max-width: 800px; 
+            margin: auto;
+        }
+
+        .dashboard-description-text {
+            font-size: 1.1em;
+            max-width: 800px; 
+            margin: 0 auto 40px auto; 
+            text-align: justify; 
+        }
+         .dashboard-description-text p {
+            margin-bottom: 15px;
+         }
+
+        .dashboard-item {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin: 30px auto; 
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e0e6eb; 
+        }
+
+        .dashboard-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-item h3 {
+            color: #3498db;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-item p {
+            font-size: 1.05em;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-item .tech-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-item .tech-list li {
+            background: #e0e6eb;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* Tentang Saya Section Styling */
+        .tentangsaya-content {
+            max-width: 800px;
+            text-align: justify;
+            margin: 0 auto;
+        }
+
+        .tentangsaya-content p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        /* Keahlian Section Styling */
+        .keahlian-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px; /* Jarak antar item keahlian */
+            max-width: 900px; /* Lebar maksimal container keahlian */
+            margin-top: 20px;
+        }
+
+        .keahlian-item {
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            width: 250px; /* Lebar tetap untuk setiap item */
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .keahlian-item:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .keahlian-item img.skill-icon { /* Jika ingin menggunakan ikon */
+            width: 60px; /* Ukuran ikon */
+            height: 60px;
+            margin-bottom: 15px;
+        }
+
+        .keahlian-item h3 {
+            color: #2c3e50; /* Warna judul keahlian */
+            font-size: 1.6em;
+            margin-bottom: 10px;
+        }
+        .keahlian-item p {
+            font-size: 0.95em;
+            color: #555;
+            line-height: 1.5;
+        }
+
+
+        /* Contact Section */
+        .contact .container {
+            max-width: 600px;
+        }
+
+        .contact p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .contact ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .contact ul li {
+            margin-bottom: 15px;
+        }
+
+        .contact ul li a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        .contact ul li a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #2c3e50;
+            color: #ecf0f1;
+            font-size: 0.9em;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .profile-section h1 { font-size: 2em; } /* Disesuaikan untuk mobile */
+            .profile-pic { width: 100px; height: 100px; } /* Disesuaikan untuk mobile */
+            .hero h1.main-title { font-size: 2.2em; } /* Disesuaikan untuk mobile */
+            .hero p.subtitle { font-size: 1.1em; } /* Disesuaikan untuk mobile */
+
+            section {
+                padding: 50px 15px;
+                min-height: auto; 
+                justify-content: flex-start; 
+                padding-top: 100px; 
+            }
+
+            section h2 { font-size: 2.2em; }
+            .dashboard-item { padding: 20px; }
+            .dashboard-description-text { text-align: left; }
+            .hero-content { margin-top: 0; }
+
+            .keahlian-item { width: calc(50% - 15px); } /* 2 item per baris di tablet */
+        }
+
+        @media (max-width: 480px) {
+            .profile-section h1 { font-size: 1.8em; }
+            .hero h1.main-title { font-size: 1.8em; }
+            .hero p.subtitle { font-size: 1em; }
+            .btn { padding: 10px 20px; font-size: 0.9em; }
+            section h2 { font-size: 1.8em; }
+            .keahlian-item { width: 100%; } /* 1 item per baris di mobile */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <ul>
+                <li><a href="#beranda">Beranda</a></li>
+                <li><a href="#tentangsaya">Tentang Saya</a></li> 
+                <li><a href="#proyek">Proyek</a></li>
+                <li><a href="#keahlian">Keahlian</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="beranda" class="hero">
+            <div class="hero-content">
+                <div class="profile-section">
+                    <img src="d:\Portofolio\1.jpg.jpg" alt="Foto Profil Anda" class="profile-pic" onerror="this.src='https://placehold.co/150x150/E0E0E0/333?text=Gagal+Muat'; this.onerror=null;">
+                    <h1>Elisabet Nio</h1>
+                    <p>Saya seorang pengembangan web portofolio yang bersemangat untuk menciptakan pengalaman digital yang menarik dan fungsional.</p>
+                </div>
+                <h1 class="main-title">Selamat Datang di Portofolio Saya</h1>
+                <p class="subtitle">Menampilkan proyek Dashboard Penjualan Sederhana dan keahlian terkait.</p>
+                <a href="#proyek" class="btn">Lihat Detail Proyek</a>
+            </div>
+        </section>
+
+        <section id="tentangsaya"> 
+            <div class="container">
+                <h2>Tentang Saya</h2>
+                <div class="tentangsaya-content">
+                    <p>Halo! Saya Elisabet Nio, seorang profesional yang bersemangat di bidang pengembangan web dan analisis data. Saya memiliki ketertarikan mendalam dalam mengubah data mentah menjadi wawasan yang dapat ditindaklanjuti melalui visualisasi yang efektif dan dashboard interaktif.</p>
+                    <p>Dengan latar belakang di bidang [Sistem Informasi], saya telah mengembangkan keahlian dalam membangun aplikasi web yang responsif dan efisien, serta kemampuan dalam mengolah dan menyajikan data kompleks menjadi format yang mudah dipahami.</p>
+                    <p>Saya percaya bahwa data adalah aset berharga, dan tujuan saya adalah membantu individu atau organisasi untuk memaksimalkan potensi data mereka. Saya selalu mencari peluang baru untuk belajar dan berinovasi di dunia teknologi yang terus berkembang.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="proyek">
+    <div class="proyek-content-wrapper container">
+        <h2>Dashboard Penjualan Sederhana</h2>
+        <div class="dashboard-item">
+            <img src="d:\Portofolio\2.jpg" alt="Contoh Dashboard Penjualan" onerror="this.src='https://placehold.co/700x400/3498db/ffffff?text=Gagal+Muat'; this.onerror=null;">
+            <h3></h3>
+            <p>Menampilkan data penjualan dalam bentuk grafik dan bagan yang mudah dipahami, seperti total penjualan, jumlah transaksi, produk terlaris, dan tren penjualan dari waktu ke waktu. Pengguna dapat berinteraksi dengan elemen visual untuk mendapatkan detail lebih lanjut.</p>
+            <ul class="tech-list">
+                
+            </ul>
+           
+        </div>
+    </div>
+</section>
+
+        <section id="keahlian"> 
+            <div class="container">
+                <h2>Keahlian Saya</h2>
+                <div class="keahlian-container">
+                    <div class="keahlian-item">
+                        <img src="https://placehold.co/60x60/E85328/ffffff?text=HTML" alt="Logo HTML" class="skill-icon">
+                        <h3>HTML</h3>
+                        <p>Struktur dasar dan konten halaman web yang semantik dan aksesibel.</p>
+                    </div>
+                    <div class="keahlian-item">
+                        <img src="https://placehold.co/60x60/25A2D1/ffffff?text=CSS" alt="Logo CSS" class="skill-icon">
+                        <h3>CSS</h3>
+                        <p>Desain visual, tata letak responsif, dan pengalaman pengguna yang menarik.</p>
+                    </div>
+                    <div class="keahlian-item">
+                        <img src="https://placehold.co/60x60/F0DB4F/323330?text=JS" alt="Logo JavaScript" class="skill-icon">
+                        <h3>JavaScript</h3>
+                        <p>Interaktivitas dinamis, manipulasi DOM, dan fungsionalitas sisi klien.</p>
+                    </div>
+                    <div class="keahlian-item">
+                        <img src="https://placehold.co/60x60/4CAF50/ffffff?text=Data" alt="Logo Analisis Data" class="skill-icon">
+                        <h3>Analisis Data</h3>
+                        <p>Mengekstraksi, membersihkan, dan menganalisis data untuk menemukan wawasan.</p>
+                    </div>
+                    <div class="keahlian-item">
+                        <img src="https://placehold.co/60x60/9C27B0/ffffff?text=Viz" alt="Logo Visualisasi Data" class="skill-icon">
+                        <h3>Visualisasi Data</h3>
+                        <p>Membuat grafik dan dashboard yang informatif dan mudah dipahami.</p>
+                    </div>
+                    <div class="keahlian-item">
+                        <img src="https://placehold.co/60x60/FF9800/ffffff?text=SQL" alt="Logo SQL" class="skill-icon">
+                        <h3>SQL</h3>
+                        <p>Mengelola dan mengambil data dari database relasional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kontak" class="contact">
+            <div class="container">
+                <h2>Hubungi Saya</h2>
+                <p>Tertarik untuk berkolaborasi dalam proyek dashboard atau analisis data? Jangan ragu untuk menghubungi saya!</p>
+                <ul>
+                    <li>Email: <a href="mailto:elisabetnio3@gmial.com">elisabetnio3@gmial.com</a></li>
+                    <li>GitHub: <a href="https://github.com/elisabetnio" target="_blank">github.com/elisabetnio</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Elisabet Nio</p>
+    </footer>
+
+    </body>
+</html>
